@@ -16,6 +16,10 @@ public class BinarySearchTree<E> {
     private final Comparator<E> comparator;
     // 节点的根节点属性
     Node<E> root;
+
+    BinarySearchTree left;
+    BinarySearchTree right;
+
     // 节点的数目属性
     private int size;
 
@@ -30,6 +34,22 @@ public class BinarySearchTree<E> {
     // 比如使用了 Integer 传过来，里面已经实现了比较的方法；
     public BinarySearchTree() {
         this(null);
+    }
+
+    // 对于二插搜索树进行前序遍历
+    // 将根节点开始遍历
+    public void preorderTraversal() {
+        preorderTraversal(root);
+    }
+
+    public void preorderTraversal(Node<E> node) {
+        if (node == null) {
+            return;
+        }
+
+        System.out.println("前序遍历到的元素为：" + node.element);
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
     }
 
     public int size() {
@@ -65,7 +85,6 @@ public class BinarySearchTree<E> {
         if (null == root) {
             // 直接创建根节点即可，自动进行连接
             root = new Node<>(element, null);
-            System.out.println(root.element); ////////////////////////////////////////////////////////////
             size++;
             return;
         } else {
@@ -87,7 +106,10 @@ public class BinarySearchTree<E> {
                     node = node.right; // node 是中间变量，可以进行遍历操作，因为是树，所以进行左右的遍历
                 } else if (cmp < 0) {
                     node = node.left;
-                } else { // 剩下了返回值是 == 0 的；
+                } else { // 剩下了返回值是 == 0 的；是相等的
+                    // 为什么覆盖掉？
+                    // 看着需求进行修改
+                    node.element = element;
                     return;
                 }
             }
@@ -97,10 +119,8 @@ public class BinarySearchTree<E> {
             Node<E> newNode = new Node<>(element, parent);
             if (cmp > 0) {
                 parent.left = newNode;
-                System.out.println("添加到了父节点的左节点" + newNode.element);////////////////////////////////////////////////////////////
             } else {
                 parent.right = newNode;
-                System.out.println("添加到了父节点的右节点" + newNode.element);////////////////////////////////////////////////////////////
             }
             size++;
         }
@@ -132,18 +152,7 @@ public class BinarySearchTree<E> {
      * < 0, e1 < e2
      */
     private int compare(E e1, E e2) {
-        // 比较器不是空的，那就是有了比较器，直接使用比较器进行比较即可
-        // 比较器中定义了相关的额比较规则
-        // 传递的比较器，没有的时候，进行强制的类型转换即可
-        if (comparator != null) {
-            return comparator.compare(e1, e2);
-        }
-
-        // 传进来的参数。没有对其进行比较器的传入，默认两个数值一定是可以进行比较的，把 e1 进行强制的类型转换，进行比较的方法的调用；
-        // 强制进行了类型的转换之后，e1 具有了 Comparable 的功能；
-        // 这里没有比较器，比如传递进来了 int 数据类型，进行自动装箱，调用 Integer 的的compareTo() 方法，返回相关的整数值即可；
-        // 很多的类实现了 Comparable 接口，可以使用compareTo() 进行元素的比较
-        return ((java.lang.Comparable<E>) e1).compareTo(e2);
+        return (Integer) e1 - (Integer) e2;
     }
 
     // 在二叉树里面，需要对于一个节点进行维护，保证各个节点之间的连线的正确性

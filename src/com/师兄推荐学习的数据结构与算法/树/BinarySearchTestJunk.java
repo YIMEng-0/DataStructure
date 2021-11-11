@@ -5,7 +5,7 @@ package com.师兄推荐学习的数据结构与算法.树;
  * @version 1.0
  * @date 2021/10/20 6:08 下午
  */
-public class BinarySearchTest02 {
+public class BinarySearchTestJunk {
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
 
@@ -13,6 +13,7 @@ public class BinarySearchTest02 {
         // 将比较规则的比较器传入进去，创建的对象有了，相关的功能，有了类体中定义的方法，可以进行调用
         // 在 BinarySearchTree 中的比较器中，直接使用这里定义好的规则即可，只能比较Person 里面的年龄
         // 在这里可以使用 java 的匿名类，就是可以在构造参数中传入一个方法
+        // 在进行二叉搜索树创建的时候，将比较器传递进去，因为在二叉搜索树中有 有参数的构造方法
         BinarySearchTree<Person> bst2 = new BinarySearchTree<>(new PersonComparator());
         bst2.add(new Person(12));
         bst2.add(new Person(99));
@@ -20,6 +21,8 @@ public class BinarySearchTest02 {
         BinarySearchTree<Person> bst3 = new BinarySearchTree<>(new PersonComparator2());
         bst3.add(new Person(12));
         bst3.add(new Person(99));
+
+        bst2.preorderTraversal();
     }
 
 
