@@ -119,8 +119,10 @@ public class BinaryTree {
      * @param root
      */
     public void traversePreOrder(Node root) {
-        if (root != null) {
-            System.out.println(root.data);
+        if (root != null) {// 进行了叶子结点的打印
+            if (root.left == null && root.right == null) {
+                System.out.println(root.data);
+            }
             traversePreOrder(root.left);
             traversePreOrder(root.right);
         }
