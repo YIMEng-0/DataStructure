@@ -72,35 +72,35 @@ public class BinaryTree {
     /**
      * 删除一个结点
      *
-     * @param current
+     * @param currentNode
      * @param value
      * @return
      */
-    private Node deleteNode(Node current, int value) {
-        if (current == null) {
+    private Node deleteNode(Node currentNode, int value) {
+        if (currentNode == null) {
             return null;
         }
-        if (value == current.data) {
-            if (current.left == null && current.right == null) {
+        if (value == currentNode.data) {
+            if (currentNode.left == null && currentNode.right == null) {
                 return null;
             }
-            if (current.left == null) {
-                return current.right;
+            if (currentNode.left == null) {
+                return currentNode.right;
             }
-            if (current.right == null) {
-                return current.left;
+            if (currentNode.right == null) {
+                return currentNode.left;
             }
-            int smallestValue = findSmallestValue(current.right);
-            current.data = smallestValue;
-            current.right = deleteNode(current.right, smallestValue);
-            return current;
+            int smallestValue = findSmallestValue(currentNode.right);
+            currentNode.data = smallestValue;
+            currentNode.right = deleteNode(currentNode.right, smallestValue);
+            return currentNode;
         }
-        if (value < current.data) {
-            current.left = deleteNode(current.left, value);
-            return current;
+        if (value < currentNode.data) {
+            currentNode.left = deleteNode(currentNode.left, value);
+            return currentNode;
         }
-        current.right = deleteNode(current.right, value);
-        return current;
+        currentNode.right = deleteNode(currentNode.right, value);
+        return currentNode;
     }
 
     /**
@@ -120,9 +120,7 @@ public class BinaryTree {
      */
     public void traversePreOrder(Node root) {
         if (root != null) {// 进行了叶子结点的打印
-            if (root.left == null && root.right == null) {
-                System.out.println(root.data);
-            }
+            System.out.println(root.data);
             traversePreOrder(root.left);
             traversePreOrder(root.right);
         }
@@ -142,6 +140,21 @@ public class BinaryTree {
     }
 
     /**
+     * 只打印叶子结点，其他的不打印
+     *
+     * @param root
+     */
+    public void traversePreOrderSon(Node root) {
+        if (root != null) {// 进行了叶子结点的打印
+            if (root.left == null & root.right == null) {
+                System.out.println("这个树里面的没有左右儿子叶子结点是：" + root.data);
+            }
+            traversePreOrderSon(root.left);
+            traversePreOrderSon(root.right);
+        }
+    }
+
+    /**
      * 后序遍历
      *
      * @param root
@@ -151,6 +164,29 @@ public class BinaryTree {
             traversePostOrder(root.left);
             traversePostOrder(root.right);
             System.out.println(root.data);
+        }
+    }
+
+
+    /**
+     * 使用了后序遍历进行树的高度的获取
+     * 思想:树的高度是左右子树的最大高度 + 1
+     *
+     * @param root 将整棵树传递进去，也就是把树的根节点传递进去
+     * @return
+     */
+    public int postOrderGetHeight(Node root) {
+        int leftTreeHeight = 0;
+        int rightTreeHeight = 0;
+        int maxTreeHeight;
+
+        if (root != null) {
+            leftTreeHeight = postOrderGetHeight(root.left);
+            rightTreeHeight = postOrderGetHeight(root.right);
+            maxTreeHeight = (leftTreeHeight > rightTreeHeight) ? leftTreeHeight : rightTreeHeight;
+            return (maxTreeHeight + 1);
+        } else {
+            return 0;
         }
     }
 
@@ -175,6 +211,75 @@ public class BinaryTree {
             if (node.right != null) {
                 nodes.add(node.right);
             }
+        }
+    }
+
+    /**
+     * 实现二叉查找树，
+     */
+
+    public Node find(int x, Node currentNode) {
+        if (currentNode == null) { // 空的树，查找失败了
+            return null;
+        }
+
+        if (x > currentNode.data) { // 当前的数值大于当前结点
+            return find(x, currentNode.right);
+        } else if (x < currentNode.data) {
+            return find(x, currentNode.left);
+        }
+        return currentNode; // 查找成功，返回找到的结点的地址，因为这是一个引用变量找到的是一个地址；
+    }
+
+    /**
+     * 上面的二叉搜索使用了尾递归的方式，效率是比较差的，下面使用了循环进行优化
+     * 二叉搜索树的效率和树的高度是存在密切的关系的；
+     * 希望树看起来是比较平衡的
+     */
+    public Node findWithWhile(int x, Node currentNode) {
+        while (currentNode != null) {
+            if (x > currentNode.data) {
+                currentNode = currentNode.right;
+            } else if (x < currentNode.data) {
+                currentNode = currentNode.left;
+            } else {
+                return currentNode;
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     * 使用递归实现寻找最大元素
+     *
+     * @param currentNode 将树的根节点进行传递进去
+     * @return 拥有最大值的结点
+     */
+    public Node findMaxDataNode(Node currentNode) {
+        if (currentNode == null) {
+            return null;
+        } else if (currentNode.right == null) {
+            return currentNode;
+        } else {
+            return findMaxDataNode(currentNode.right);
+        }
+    }
+
+    /**
+     * 使用递归实现寻找树中的最小值元素
+     *
+     * @param currentNode 先传进去的是树的根结点
+     * @return 找到拥有最小值的结点
+     */
+    public Node findMinDataNode(Node currentNode) {
+        if (currentNode == null) { // 一般是根节点先传进来，这里为空，就是null 什么都没有
+            return null;
+        }
+        if (currentNode.left == null) { // 找最小的元素，左边没有任何元素，根一定是最小的元素
+            return currentNode;
+        } else {
+            return findMinDataNode(currentNode.left); // 进行下面的元素寻找，始终寻找最左边的元素
         }
     }
 }
