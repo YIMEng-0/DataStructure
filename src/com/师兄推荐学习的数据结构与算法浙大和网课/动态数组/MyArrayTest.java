@@ -19,7 +19,6 @@ public class MyArrayTest {
         persons.add(10);
         System.out.println(persons);
         System.out.println("null 空元素的位置是：" + persons.indexOf(null));
-
     }
     // 程序运行的时候，在此处会进行；垃圾回收，减少内存的消耗
 }

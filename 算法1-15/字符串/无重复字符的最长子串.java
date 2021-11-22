@@ -9,11 +9,15 @@ import java.util.Map;
  * @author MJ
  *
  */
-public class _3_无重复字符的最长子串 {
+public class 无重复字符的最长子串 {
     public int lengthOfLongestSubstring(String s) {
-    	if (s == null) return 0;
+    	if (s == null) {
+			return 0;
+		}
     	char[] chars = s.toCharArray();
-    	if (chars.length == 0) return 0;
+    	if (chars.length == 0) {
+			return 0;
+		}
     	
     	// 用来保存每一个字符上一次出现的位置
     	int[] prevIdxes = new int[128];
@@ -39,9 +43,13 @@ public class _3_无重复字符的最长子串 {
     }
     
     public int lengthOfLongestSubstring2(String s) {
-    	if (s == null) return 0;
+    	if (s == null) {
+			return 0;
+		}
     	char[] chars = s.toCharArray();
-    	if (chars.length == 0) return 0;
+    	if (chars.length == 0) {
+			return 0;
+		}
     	
     	// 用来保存每一个字符上一次出现的位置
     	Map<Character, Integer> prevIdxes = new HashMap<>();
