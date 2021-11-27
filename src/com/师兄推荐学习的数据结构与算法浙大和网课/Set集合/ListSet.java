@@ -22,7 +22,7 @@ public class ListSet<E> implements Set<E> {
      *
      *      多态的实现方式
      *          方式一：重写：
-     *              这个内容已经在上一章节详细讲过，就不再阐述，详细可访问：Java 重写(Override)与重载(Overload)。
+     *              Java 重写(Override)与重载(Overload)。
      *          方式二：接口
      *              1. 生活中的接口最具代表性的就是插座，例如一个三接头的插头都能接在三孔插座中，因为这个是每个国家都有各自规定的接口规则，有可能到国外就不行，那是因为国外自己定义的接口类型。
      *              2. java中的接口类似于生活中的接口，就是一些方法特征的集合，但没有方法的实现。具体可以看 java接口 这一章节的内容。
@@ -58,18 +58,43 @@ public class ListSet<E> implements Set<E> {
      * 核心算法 Set 集合中添加元素，加入的元素需要是没有顺序（进去出来的顺序不一致，并且放进去的元素是不能重复的），
      * @param element
      */
+
     @Override
     public void add(Object element) {
-
+        if (list.contains(element)) {
+            return;
+        } else {
+            list.add((E) element);
+        }
     }
 
     @Override
     public void remove(Object element) {
+        int index = list.indexOf(element);
 
+        if (list.contains(element)) {
+            remove(element);
+            System.out.println("已经删除了元素： " + element);
+        }
     }
 
+
+    /**
+     * 使用链表进行遍历操作
+     * @param visitor
+     */
     @Override
     public void traversal(Visitor visitor) {
+        if (visitor == null) {
+            return;
+        }
 
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            if (visitor.visit(list.get(i))) { // 当在遍历的时候得到了元素，那么就返回，否则就没有找到
+                System.out.println("找到的元素是：" + list.get(i));
+                return;
+            }
+        }
     }
 }

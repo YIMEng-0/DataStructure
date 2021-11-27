@@ -30,6 +30,5 @@ public interface Set<E> {
         boolean stop;
 
         abstract boolean visit(E element);
-
     }
 }
