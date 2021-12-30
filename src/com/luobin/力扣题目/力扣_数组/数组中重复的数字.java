@@ -15,6 +15,7 @@ public class 数组中重复的数字 {
     }
 
     public static int findRepeat(int[] arr) {
+        // 排序 寻找有没有相邻存在大小相等的数字
         Arrays.sort(arr);
         int count = 1;
         for (int i = 0; i < arr.length; i++) {

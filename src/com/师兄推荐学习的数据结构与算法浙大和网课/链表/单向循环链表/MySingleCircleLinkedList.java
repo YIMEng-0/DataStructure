@@ -42,6 +42,7 @@ public class MySingleCircleLinkedList<E> extends AbstractList<E> {
     // 单独将元素添加进去
     // 采用调用按照索引添加的方式
     // 默认将元素添加到最后面
+    @Override
     public void add(E e) {
         // 此处调用了加入的方法，根据位置，进行元素的加入
         add(size, e);
@@ -138,7 +139,9 @@ public class MySingleCircleLinkedList<E> extends AbstractList<E> {
         if (element == null) {
             Node<E> node = first;
             for (int i = 0; i < size; i++) {
-                if (node.element == null) return i; // 遍历到最后面了 返回索引即可
+                if (node.element == null) {
+                    return i; // 遍历到最后面了 返回索引即可
+                }
                 node = node.next;
             }
         } else {

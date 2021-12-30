@@ -7,7 +7,7 @@ package com.luobin.力扣题目.力扣_链表;
  * <p>
  * https://leetcode-cn.com/problems/delete-node-in-a-linked-list/
  */
-public class _237_删除链表中的结点 {
+public class 力扣237删除链表中的结点 {
 
     /**
      * 实现思路：
