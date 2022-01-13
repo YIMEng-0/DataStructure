@@ -5,6 +5,7 @@ package com.luobin.力扣题目.力扣_链表.力扣024两两交换链表中的�
  * @date 2021/12/31 3:36 下午
  * @version 1.0
  */
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -23,8 +24,7 @@ public class Solution {
         ListNode cur = dummmyHead;
         dummmyHead.next = head;
 
-
-        while(cur.next != null && cur.next.next != null) {
+        while (cur.next != null && cur.next.next != null) {
             ListNode temp = cur.next;
             ListNode temp1 = cur.next.next.next;
             temp = cur.next;
