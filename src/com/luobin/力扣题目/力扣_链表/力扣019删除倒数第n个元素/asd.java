@@ -1,4 +1,4 @@
-package com.luobin.力扣题目.力扣_链表.删除倒数第n个元素;
+package com.luobin.力扣题目.力扣_链表.力扣019删除倒数第n个元素;
 
 /**
  * @author Doraemon
