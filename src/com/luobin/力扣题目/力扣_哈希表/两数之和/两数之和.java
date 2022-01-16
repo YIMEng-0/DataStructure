@@ -1,4 +1,4 @@
-package com.luobin.力扣题目.哈希表;
+package com.luobin.力扣题目.力扣_哈希表.两数之和;
 
 import java.util.HashMap;
 import java.util.Map;
